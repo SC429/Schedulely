@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create</title>
+    <link rel= "stylesheet" href="static/styling.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul style="font-size: 30px;" class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('index')}}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href = "{{url_for('about')}}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href ="{{url_for('create')}}">Create</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href ="{{url_for('contact')}}">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id = "title">
+      Personalize your semester schedule
+    </div>
+
+    <div id = "form">
+        <form align="center" action="{{url_for('result'), selection}}" method="post">
+          <fieldset>
+            <label>Select your classes</label>
+              {% for num in range(selection) %}
+                <select name = "{{ num }}">
+                  {% for entry in data %}
+                    <option value = "{{ entry.id }}">{{ entry.class }} at {{ entry.time }}<option>
+                  {% endfor %}
+                </select>
+              {% endfor %}
+            <button class="btn btn-primary">Schedule now</button>
+          </fieldset>
+        </form>
+    </div>
+  </body>
+</html>
